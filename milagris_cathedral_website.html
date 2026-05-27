@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#C9A84C;--gold-light:#E8C97A;
+  --dark:#110E0A;--dark2:#1C1710;
+  --cream:#FAF7F1;--white:#fff;
+  --text:#221C10;--muted:#7A6A50;--accent:#8B1A1A;
+}
+body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;font-size:16px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(17,14,10,0.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,0.25)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:68px}
+.nav-logo{font-family:'Cinzel',serif;color:var(--gold);font-size:1rem;font-weight:700;letter-spacing:2px;text-decoration:none;display:flex;align-items:center;gap:10px;line-height:1.2}
+.nav-logo span{font-size:0.65rem;font-weight:400;color:rgba(201,168,76,0.65);letter-spacing:3px;display:block;text-transform:uppercase}
+.cross-icon{font-size:1.4rem;color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.78);text-decoration:none;font-size:0.75rem;letter-spacing:1.8px;text-transform:uppercase;font-weight:400;transition:color 0.3s;padding:4px 0;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold-light)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+
+/* LIVE BANNER */
+.live-banner{margin-top:68px;background:linear-gradient(90deg,#6B0F0F 0%,#9B1C1C 40%,#9B1C1C 60%,#6B0F0F 100%);padding:12px 2rem;display:flex;align-items:center;justify-content:center;gap:1.25rem;flex-wrap:wrap;border-bottom:2px solid rgba(201,168,76,0.45)}
+.live-pip{display:flex;align-items:center;gap:7px}
+.live-dot{width:9px;height:9px;background:#fff;border-radius:50%;animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.4)}}
+@keyframes church-pan{0%,100%{object-position:center 10%}50%{object-position:center 90%}}
+.live-badge{background:#fff;color:#8B1A1A;font-size:0.62rem;font-weight:700;letter-spacing:2.5px;padding:3px 8px;border-radius:2px;text-transform:uppercase}
+.live-text{color:#fff;font-size:0.88rem}
+.live-text strong{font-weight:700;color:#FFE8A0}
+.yt-btn{background:var(--gold);color:var(--dark);font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:9px 20px;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:background 0.25s;white-space:nowrap}
+.yt-btn:hover{background:var(--gold-light)}
+.yt-icon{width:16px;height:16px;fill:#1A1410}
+
+/* HERO */
+.hero{position:relative;height:92vh;min-height:580px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5rem}
+.hero-slide{position:absolute;inset:0}
+.hero-slide img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.hero-dim{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(17,14,10,0.15) 0%,rgba(17,14,10,0.25) 40%,rgba(17,14,10,0.82) 100%)}
+.hero-content{position:relative;text-align:center;color:#fff;max-width:780px;padding:0 2rem}
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:5px;color:var(--gold-light);text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:14px}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:40px;height:1px;background:var(--gold)}
+h1.hero-title{font-family:'Cinzel',serif;font-size:clamp(2rem,5.5vw,3.8rem);font-weight:700;line-height:1.12;margin-bottom:0.5rem;text-shadow:0 3px 24px rgba(0,0,0,0.6)}
+.hero-subtitle{font-family:'Cinzel',serif;font-size:clamp(0.9rem,2vw,1.15rem);font-weight:400;color:rgba(255,255,255,0.75);letter-spacing:2px;margin-bottom:0.6rem;font-style:italic}
+.hero-tagline{font-size:1rem;color:rgba(255,255,255,0.65);letter-spacing:0.5px;margin-bottom:2.2rem;font-weight:300;line-height:1.75}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--dark);font-family:'Lato',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:13px 30px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.3s}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:#fff;font-family:'Lato',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:12px 30px;border:1px solid rgba(255,255,255,0.5);cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.3s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* MASS TIMES */
+.mass-bar{background:var(--dark);padding:1.4rem 2rem;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap;border-bottom:1px solid rgba(201,168,76,0.15)}
+.mass-item{text-align:center}
+.mass-day{font-family:'Cinzel',serif;color:var(--gold);font-size:0.62rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:4px}
+.mass-time{font-size:0.84rem;color:rgba(255,255,255,0.78);font-weight:300}
+.vline{width:1px;height:36px;background:rgba(201,168,76,0.22)}
+
+/* SECTIONS */
+.section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.sec-label{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem}
+h2.sec-title{font-family:'Cinzel',serif;font-size:clamp(1.7rem,3.5vw,2.5rem);font-weight:600;color:var(--dark);line-height:1.18;margin-bottom:0.4rem}
+.gold-rule{width:48px;height:2px;background:var(--gold);margin:1.2rem 0 1.6rem}
+.sec-body{font-size:0.97rem;line-height:1.9;color:var(--muted)}
+
+/* WELCOME */
+.welcome-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.img-collage{position:relative;height:520px}
+.img-main-w{position:absolute;right:0;top:0;width:80%;height:390px;object-fit:cover;object-position:center;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+.img-accent-w{position:absolute;left:0;bottom:0;width:54%;height:260px;object-fit:cover;object-position:center top;display:block;box-shadow:0 12px 40px rgba(0,0,0,0.18);border:6px solid var(--cream)}
+.deco-corner{position:absolute;top:16px;left:16px;width:56px;height:56px;border-top:2px solid var(--gold);border-left:2px solid var(--gold)}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.stat-card{text-align:center;padding:1.5rem 1rem;border:1px solid rgba(201,168,76,0.2);background:rgba(201,168,76,0.03)}
+.stat-num{font-family:'Cinzel',serif;font-size:2.2rem;font-weight:700;color:var(--gold)}
+.stat-lbl{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* GALLERY */
+.gallery-section{background:#fff;padding:4rem 0}
+.gallery-header{max-width:1200px;margin:0 auto;padding:0 2rem 2rem}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);max-width:1200px;margin:0 auto;padding:0 2rem;gap:8px}
+.gal-img{width:100%;height:230px;object-fit:cover;object-position:center;display:block;filter:brightness(0.9) saturate(0.9);transition:all 0.4s;cursor:pointer}
+.gal-img:hover{filter:brightness(1.05) saturate(1.1);transform:scale(1.02)}
+
+/* EVENTS */
+.events-wrap{background:var(--dark2)}
+.events-inner{max-width:1200px;margin:0 auto;padding:5rem 2rem}
+.ev-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem}
+.events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.ev-card{background:rgba(255,255,255,0.035);border:1px solid rgba(201,168,76,0.18);padding:1.6rem;transition:all 0.3s;cursor:pointer}
+.ev-card:hover{background:rgba(201,168,76,0.07);border-color:rgba(201,168,76,0.45);transform:translateY(-5px)}
+.ev-date{font-family:'Cinzel',serif;color:var(--gold);font-size:0.65rem;letter-spacing:2px;margin-bottom:0.65rem}
+.ev-name{font-family:'Cinzel',serif;color:#fff;font-size:1rem;margin-bottom:0.45rem;line-height:1.3}
+.ev-desc{font-size:0.83rem;color:rgba(255,255,255,0.48);line-height:1.65}
+.ev-tag{display:inline-block;margin-top:0.9rem;font-size:0.62rem;letter-spacing:1.5px;text-transform:uppercase;padding:4px 9px;border:1px solid rgba(201,168,76,0.35);color:var(--gold)}
+
+/* CONTACT */
+.contact-section{background:var(--cream)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-items{display:flex;flex-direction:column;gap:1.75rem;margin-top:2rem}
+.ci{display:flex;gap:1.1rem;align-items:flex-start}
+.ci-icon{width:42px;height:42px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.28);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+.ci-label{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:3px}
+.ci-val{font-size:0.88rem;color:var(--muted);line-height:1.65}
+.form-wrap{display:flex;flex-direction:column;gap:0.9rem}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem}
+input[type=text],input[type=email],textarea{font-family:'Lato',sans-serif;font-size:0.88rem;padding:12px 15px;border:1px solid rgba(201,168,76,0.22);background:rgba(201,168,76,0.03);color:var(--text);outline:none;transition:border 0.3s;width:100%;-webkit-appearance:none}
+input:focus,textarea:focus{border-color:var(--gold);background:rgba(201,168,76,0.06)}
+textarea{height:120px;resize:vertical}
+::placeholder{color:#B0A080;font-size:0.84rem}
+
+/* FOOTER */
+footer{background:var(--dark);border-top:2px solid rgba(201,168,76,0.25);padding:4rem 2rem 2.5rem}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:3rem;margin-bottom:3rem;flex-wrap:wrap}
+.foot-brand{}
+.foot-logo{font-family:'Cinzel',serif;color:var(--gold);font-size:1.1rem;font-weight:700;letter-spacing:2px;margin-bottom:0.3rem}
+.foot-sub{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:3px;color:rgba(201,168,76,0.55);text-transform:uppercase;margin-bottom:1rem}
+.foot-desc{font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.75;max-width:260px}
+.foot-h{font-family:'Cinzel',serif;color:var(--gold);font-size:0.65rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1.1rem}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:0.65rem}
+.foot-links a{font-size:0.82rem;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.5px;transition:color 0.25s}
+.foot-links a:hover{color:var(--gold-light)}
+.foot-mass{display:flex;flex-direction:column;gap:0.55rem}
+.fm-row{display:flex;justify-content:space-between;gap:1rem;font-size:0.8rem}
+.fm-day{color:rgba(255,255,255,0.42);font-size:0.75rem;letter-spacing:0.5px}
+.fm-time{color:rgba(255,255,255,0.7);font-weight:400;font-size:0.78rem}
+.foot-contact-list{display:flex;flex-direction:column;gap:0.7rem}
+.fci{display:flex;gap:8px;align-items:flex-start}
+.fci-icon{color:var(--gold);font-size:0.9rem;flex-shrink:0;margin-top:1px}
+.fci-text{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.6}
+.foot-bottom{max-width:1200px;margin:0 auto;padding-top:2rem;border-top:1px solid rgba(201,168,76,0.12);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.foot-copy{font-size:0.74rem;color:rgba(255,255,255,0.28);letter-spacing:0.5px}
+.foot-nav{display:flex;gap:1.5rem}
+.foot-nav a{font-size:0.72rem;color:rgba(255,255,255,0.32);letter-spacing:1px;text-decoration:none;text-transform:uppercase;transition:color 0.25s}
+.foot-nav a:hover{color:var(--gold)}
+
+@media(max-width:900px){
+  .welcome-grid,.contact-grid{grid-template-columns:1fr}
+  .events-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .img-collage{height:340px}
+  .img-main-w{width:85%;height:280px}
+  .img-accent-w{width:52%;height:190px}
+}
+@media(max-width:600px){
+  .events-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .mass-bar{gap:1.2rem}
+  .vline{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">
+      <span class="cross-icon">✝</span>
+      <div>
+        Milagris Cathedral
+        <span>Our Lady of Miracles · Est. 1862</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- LIVE BANNER -->
+<div class="live-banner" id="home">
+  <div class="live-pip">
+    <div class="live-dot"></div>
+    <span class="live-badge">Live Now</span>
+  </div>
+  <span class="live-text"><strong>Sunday Solemn Mass</strong> — Feast of Corpus Christi &nbsp;·&nbsp; 9:00 AM</span>
+  <a href="https://www.youtube.com/@MilagrisCathedral" target="_blank" class="yt-btn">
+    <svg class="yt-icon" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-2.52 4.83 4.83 0 0 1-2.42.64H10.6a4.83 4.83 0 0 1-2.42-.64A4.83 4.83 0 0 1 4.41 6.69 4.83 4.83 0 0 1 2 10.46v3.08a4.83 4.83 0 0 1 2.41 3.77 4.83 4.83 0 0 1 3.77 2.52 4.83 4.83 0 0 1 2.42-.64h2.8a4.83 4.83 0 0 1 2.42.64 4.83 4.83 0 0 1 3.77-2.52A4.83 4.83 0 0 1 22 13.54v-3.08a4.83 4.83 0 0 1-2.41-3.77zM10 15V9l5 3z"/></svg>
+    Watch on YouTube
+  </a>
+</div>
+
+<!-- HERO — using uploaded church exterior image -->
+<div class="hero">
+  <div class="hero-slide" style="background:linear-gradient(to bottom,#C8B2BE 0%,#A08090 40%,#2A1820 100%)">
+    <!-- Church exterior photo from upload 1 -->
+    <img src="699625818_122111383245099962_8622284282041034456_n.jpg" alt="Milagris Cathedral exterior at dusk" style="width:100%;height:100%;object-fit:cover;display:block;animation:church-pan 16s ease-in-out infinite;">
+  </div>
+  <div class="hero-dim"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Salaiwada · Savantvadi · Since 1862</div>
+    <h1 class="hero-title">Milagris Cathedral</h1>
+    <div class="hero-subtitle">Our Lady of Miracles</div>
+    <p class="hero-tagline">A sanctuary of faith, hope and divine grace —<br>open to all who seek Her intercession.</p>
+    <div class="hero-btns">
+      <a href="#events" class="btn-gold">Upcoming Events</a>
+      <a href="#about" class="btn-ghost">Our Story</a>
+    </div>
+  </div>
+</div>
+
+<!-- MASS TIMES -->
+<div class="mass-bar">
+  <div class="mass-item"><div class="mass-day">Mon – Fri</div><div class="mass-time">6:30 AM &nbsp;·&nbsp; 7:00 PM</div></div>
+  <div class="vline"></div>
+  <div class="mass-item"><div class="mass-day">Saturday</div><div class="mass-time">7:00 AM &nbsp;·&nbsp; 6:00 PM</div></div>
+  <div class="vline"></div>
+  <div class="mass-item"><div class="mass-day">Sunday</div><div class="mass-time">7:00 AM &nbsp;·&nbsp; 8:15 AM &nbsp;·&nbsp; 9:30 AM</div></div>
+  <div class="vline"></div>
+  <div class="mass-item"><div class="mass-day">Confession</div><div class="mass-time">Sat 5:00 – 5:45 PM</div></div>
+</div>
+
+<!-- ABOUT / WELCOME -->
+<div id="about" style="background:var(--cream)">
+  <div class="section">
+    <div class="welcome-grid">
+      <div>
+        <div class="sec-label">Welcome Home</div>
+        <h2 class="sec-title">A Place of Miracles<br>Since 1862</h2>
+        <div class="gold-rule"></div>
+        <p class="sec-body">Milagris Cathedral — dedicated to Our Lady of Miracles — stands as one of the most beloved pilgrimage churches on the Konkan coast. For over 163 years, the faithful have gathered beneath Her gaze to seek intercession, celebrate sacraments, and find peace.</p>
+        <p class="sec-body" style="margin-top:1rem">The cathedral's striking Gothic facade, adorned with the Alpha and Omega and crowned by a glowing red cross, gives way to a breathtaking interior — with a sky-painted octagonal dome, vivid stained glass, and an ornate gilded altarpiece bearing the INRI cross at its heart.</p>
+        <a href="#contact" class="btn-gold" style="margin-top:2rem;display:inline-block">Plan Your Visit</a>
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-num">163</div><div class="stat-lbl">Years of Faith</div></div>
+          <div class="stat-card"><div class="stat-num">5K+</div><div class="stat-lbl">Parishioners</div></div>
+          <div class="stat-card"><div class="stat-num">12</div><div class="stat-lbl">Weekly Masses</div></div>
+        </div>
+      </div>
+      <div class="img-collage">
+        <div class="deco-corner"></div>
+        <!-- Altar close-up from upload 3 -->
+        <img class="img-main-w" src="694276807_122111360565099962_3491512992019498197_n.jpg" alt="Milagris Cathedral altar">
+        <!-- Exterior from upload 1 -->
+        <img class="img-accent-w" src="692658857_122111360583099962_710021319150987779_n.jpg" alt="Milagris Cathedral facade">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-section">
+  <div class="gallery-header">
+    <div class="sec-label">Our Cathedral</div>
+    <h2 class="sec-title">A Glimpse Inside</h2>
+    <div class="gold-rule"></div>
+  </div>
+  <div class="gallery-grid">
+    <img class="gal-img" src="697266512_122111272011099962_4008503804974852389_n.jpg" alt="Cathedral exterior at dusk" style="object-position:center top">
+    <img class="gal-img" src="698572530_122111360595099962_8559018062043900632_n.jpg" alt="Cathedral dome ceiling and altar" style="object-position:center top">
+    <img class="gal-img" src="694276807_122111360565099962_3491512992019498197_n.jpg" alt="Main altar close-up" style="object-position:center top">
+    <img class="gal-img" src="692658857_122111360583099962_710021319150987779_n.jpg" alt="Cathedral nave with chandeliers" style="object-position:center top">
+  </div>
+</div>
+
+<!-- EVENTS -->
+<div class="events-wrap" id="events">
+  <div class="events-inner">
+    <div class="ev-header">
+      <div>
+        <div class="sec-label" style="color:var(--gold)">Upcoming</div>
+        <h2 class="sec-title" style="color:#fff">Events &amp; Celebrations</h2>
+        <div class="gold-rule"></div>
+      </div>
+      <a href="#" class="btn-ghost" style="font-size:0.7rem">View All Events</a>
+    </div>
+    <div class="events-grid">
+      <div class="ev-card">
+        <div class="ev-date">June 19, 2025 &nbsp;·&nbsp; 9:00 AM</div>
+        <div class="ev-name">Corpus Christi Solemn Mass</div>
+        <div class="ev-desc">Grand celebration of the Body and Blood of Christ, followed by a solemn procession through the parish grounds.</div>
+        <span class="ev-tag">Live on YouTube</span>
+      </div>
+      <div class="ev-card">
+        <div class="ev-date">June 24, 2025 &nbsp;·&nbsp; 7:00 PM</div>
+        <div class="ev-name">Feast of St. John the Baptist</div>
+        <div class="ev-desc">Evening mass, novena prayers and a community gathering to honour the forerunner of Christ.</div>
+        <span class="ev-tag">All Welcome</span>
+      </div>
+      <div class="ev-card">
+        <div class="ev-date">August 15, 2025 &nbsp;·&nbsp; 9:00 AM</div>
+        <div class="ev-name">Feast of Our Lady of Miracles</div>
+        <div class="ev-desc">Patronal feast of Milagris Cathedral — solemn mass, novena, procession and cultural celebration. The grandest day of the year.</div>
+        <span class="ev-tag">Live on YouTube</span>
+      </div>
+      <div class="ev-card">
+        <div class="ev-date">August 28, 2025 &nbsp;·&nbsp; 7:00 PM</div>
+        <div class="ev-name">Youth Prayer Night</div>
+        <div class="ev-desc">An evening of praise, worship and adoration for the youth of the parish. Open to all aged 16–35.</div>
+        <span class="ev-tag">Youth Ministry</span>
+      </div>
+      <div class="ev-card">
+        <div class="ev-date">September 8, 2025 &nbsp;·&nbsp; 9:00 AM</div>
+        <div class="ev-name">Nativity of the Blessed Virgin Mary</div>
+        <div class="ev-desc">Solemn mass on the birthday of Our Lady, with special prayers and floral offerings at the grotto.</div>
+        <span class="ev-tag">Feast Day</span>
+      </div>
+      <div class="ev-card">
+        <div class="ev-date">December 25, 2025 &nbsp;·&nbsp; 12:00 AM</div>
+        <div class="ev-name">Christmas Midnight Mass</div>
+        <div class="ev-desc">The most anticipated mass of the year — with the Nativity play, choir, and a candlelit procession at midnight.</div>
+        <span class="ev-tag">Live on YouTube</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="contact-section">
+  <div class="section">
+    <div class="contact-grid">
+      <div>
+        <div class="sec-label">Find Us</div>
+        <h2 class="sec-title">Visit Milagris<br>Cathedral</h2>
+        <div class="gold-rule"></div>
+        <p class="sec-body">We warmly welcome all who wish to pray, attend mass, or simply step inside and experience the beauty of this sacred space. Come as you are.</p>
+        <div class="contact-items">
+          <div class="ci">
+            <div class="ci-icon">📍</div>
+            <div>
+              <div class="ci-label">Address</div>
+              <div class="ci-val">Milagris Cathedral<br>Salaiwada, Savantvadi<br>Maharashtra, India — 416510</div>
+            </div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon">🕐</div>
+            <div>
+              <div class="ci-label">Parish Office Hours</div>
+              <div class="ci-val">Monday to Saturday<br>9:00 AM – 1:00 PM &nbsp;·&nbsp; 3:00 PM – 6:00 PM</div>
+            </div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon">✉️</div>
+            <div>
+              <div class="ci-label">Email</div>
+              <div class="ci-val">info@milagriscathedral.org</div>
+            </div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon">📞</div>
+            <div>
+              <div class="ci-label">Phone</div>
+              <div class="ci-val">+91 XXXXX XXXXX</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--dark);margin-bottom:1.4rem;letter-spacing:1px">Send a Message</h3>
+        <div class="form-wrap">
+          <div class="row2">
+            <input type="text" placeholder="Your Name">
+            <input type="email" placeholder="Email Address">
+          </div>
+          <input type="text" placeholder="Subject">
+          <textarea placeholder="Your message..."></textarea>
+          <button class="btn-gold" style="align-self:flex-start;cursor:pointer;border:none;font-family:'Lato',sans-serif">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="foot-brand">
+      <div class="foot-logo">✝ Milagris Cathedral</div>
+      <div class="foot-sub">Our Lady of Miracles</div>
+      <p class="foot-desc">A pilgrimage church of faith and grace on the Konkan coast, dedicated to Our Lady of Miracles since 1862. All are welcome.</p>
+    </div>
+    <div>
+      <div class="foot-h">Quick Links</div>
+      <ul class="foot-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#">Live Mass</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-h">Mass Schedule</div>
+      <div class="foot-mass">
+        <div class="fm-row"><span class="fm-day">Mon–Fri</span><span class="fm-time">6:30 AM, 7:00 PM</span></div>
+        <div class="fm-row"><span class="fm-day">Saturday</span><span class="fm-time">7:00 AM, 6:00 PM</span></div>
+        <div class="fm-row"><span class="fm-day">Sunday</span><span class="fm-time">7, 9, 11 AM</span></div>
+        <div class="fm-row"><span class="fm-day">Confession</span><span class="fm-time">Sat 5–5:45 PM</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="foot-h">Contact &amp; Address</div>
+      <div class="foot-contact-list">
+        <div class="fci">
+          <span class="fci-icon">📍</span>
+          <span class="fci-text">Salaiwada, Savantvadi,<br>Maharashtra, India 416510</span>
+        </div>
+        <div class="fci">
+          <span class="fci-icon">✉️</span>
+          <span class="fci-text">info@milagriscathedral.org</span>
+        </div>
+        <div class="fci">
+          <span class="fci-icon">📞</span>
+          <span class="fci-text">+91 XXXXX XXXXX</span>
+        </div>
+        <div class="fci">
+          <span class="fci-icon">▶</span>
+          <span class="fci-text">youtube.com/@MilagrisCathedral</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div class="foot-copy">© 2025 Milagris Cathedral, Savantvadi. All rights reserved.</div>
+    <div class="foot-nav">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#events">Events</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href');
+    if(href==='#') return;
+    e.preventDefault();
+    const t=document.querySelector(href);
+    if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+    document.querySelectorAll('.nav-links a').forEach(l=>l.classList.remove('active'));
+    const navMatch=document.querySelector('.nav-links a[href="'+href+'"]');
+    if(navMatch) navMatch.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
